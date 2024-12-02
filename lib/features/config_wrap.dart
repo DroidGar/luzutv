@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
-import 'package:luzu/video_provider.dart';
+import 'package:luzu/features/video_provider.dart';
 
 class ConfigWrap extends StatefulWidget {
   final Widget child;
@@ -16,7 +16,10 @@ class ConfigWrap extends StatefulWidget {
 class _ConfigWrapState extends State<ConfigWrap> {
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder(stream: stream, builder: builder);
+    return StreamBuilder(
+      stream: stream,
+      builder: builder,
+    );
   }
 
   Stream get stream => Stream.fromFuture(
@@ -27,8 +30,19 @@ class _ConfigWrapState extends State<ConfigWrap> {
         if (snapshot.data == null) {
           return const Center(child: CircularProgressIndicator());
         }
-        final videoId = jsonDecode(snapshot.data.body)["videoId"];
-        Provider.of<VideoProvider>(context, listen: false).setVideoId(videoId);
+        if(snapshot.hasError) {
+          return const Center(child: Text("Error"));
+        }
+        // final videoId = jsonDecode(snapshot.data.body)["videoId"];
+        final videoId = "cb12KmMMDJA";
+
+        if(videoId.isEmpty) {
+          return const Center(child: Text("Offline"));
+        }
+
+        Future.microtask(() {
+          Provider.of<VideoProvider>(context, listen: false).setVideoId(videoId);
+        });
         return widget.child;
       };
 }
