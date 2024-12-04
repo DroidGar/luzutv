@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
-class VideoPage extends StatefulWidget {
+class VideoWidget extends StatefulWidget {
   final String videoId;
-  const VideoPage({super.key, required this.videoId});
+
+  const VideoWidget({super.key, required this.videoId});
 
   @override
-  State<VideoPage> createState() => _VideoPageState();
+  State<VideoWidget> createState() => _VideoWidgetState();
 }
 
-class _VideoPageState extends State<VideoPage> {
+class _VideoWidgetState extends State<VideoWidget> {
   late YoutubePlayerController _controller;
 
   @override
@@ -17,10 +18,13 @@ class _VideoPageState extends State<VideoPage> {
     super.initState();
     _controller = YoutubePlayerController(
       initialVideoId: widget.videoId,
-      flags: const YoutubePlayerFlags(autoPlay: true, isLive: true),
+      flags: const YoutubePlayerFlags(
+        autoPlay: false,
+        isLive: true,
+        hideControls: false,
+      ),
     );
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +48,6 @@ class _VideoPageState extends State<VideoPage> {
         onReady: () {
           // _controller.addListener(listener);
         },
-
       ),
     );
     return videoView;

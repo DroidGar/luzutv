@@ -1,8 +1,9 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:luzu/main.dart';
 import 'package:provider/provider.dart';
-import 'package:luzu/features/video_provider.dart';
+import 'package:luzu/features/video/video_provider.dart';
 
 class ConfigWrap extends StatefulWidget {
   final Widget child;
@@ -23,7 +24,7 @@ class _ConfigWrapState extends State<ConfigWrap> {
   }
 
   Stream get stream => Stream.fromFuture(
-        http.get(Uri.parse('https://api.luzutv.com/appConfig')),
+        http.get(Uri.parse('$host/appConfig')),
       );
 
   get builder => (context, snapshot) {
@@ -33,8 +34,8 @@ class _ConfigWrapState extends State<ConfigWrap> {
         if(snapshot.hasError) {
           return const Center(child: Text("Error"));
         }
-        // final videoId = jsonDecode(snapshot.data.body)["videoId"];
-        final videoId = "cb12KmMMDJA";
+        final videoId = jsonDecode(snapshot.data.body)["videoId"];
+        // final videoId = "cb12KmMMDJA";
 
         if(videoId.isEmpty) {
           return const Center(child: Text("Offline"));

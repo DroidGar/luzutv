@@ -1,22 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:luzu/features/config_wrap.dart';
-import 'package:luzu/features/home_page.dart';
-
+import 'package:luzu/core/services/router_service.dart';
+import 'package:luzu/core/services/theme_service.dart';
 
 class App extends StatelessWidget {
+  final RouterService routerService;
 
-  const App({super.key});
+  const App({super.key, required this.routerService});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
-      home: const ConfigWrap(child: HomePage()),
-    );
+    return MaterialApp.router(theme: theme, routerConfig: routerService.router);
   }
 }

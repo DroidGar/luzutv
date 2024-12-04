@@ -1,10 +1,12 @@
 import 'package:floating/floating.dart';
 import 'package:flutter/material.dart';
-import 'package:luzu/features/video_page.dart';
-import 'package:luzu/features/video_provider.dart';
+import 'package:luzu/features/video/video_widget.dart';
+import 'package:luzu/features/video/video_provider.dart';
 import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
+  static String routeName = '/';
+
   const HomePage({super.key});
 
   @override
@@ -16,12 +18,16 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     final videoId = Provider.of<VideoProvider>(context).videoId;
     if (videoId.isEmpty) {
-      return const Center(child: CircularProgressIndicator());
+      return const Text('No video selected');
     }
 
-    final videoWidget = VideoPage(videoId: videoId);
+    final videoWidget = VideoWidget(videoId: videoId);
+
     return PiPSwitcher(
       childWhenDisabled: Scaffold(
+        appBar: AppBar(
+          leading: Image.asset('assets/images/logo.png'),
+        ),
         body: Column(
           children: [
             videoWidget,
