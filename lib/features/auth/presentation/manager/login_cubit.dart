@@ -18,7 +18,7 @@ class LoginCubit extends Cubit<LoginState> {
     final result = await loginOnFirebase(data);
     result.fold(
       (failure) => emit(OnLoginFailure(failure)),
-      (success) => emit(OnLoginSuccess()),
+      (uid) => emit(OnLoginFirebaseSuccess(uid)),
     );
   }
 

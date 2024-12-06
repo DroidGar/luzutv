@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:luzu/app.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:luzu/core/services/di_service.dart';
@@ -24,7 +25,12 @@ void main() async {
 
   await setUpDependencies();
 
-  final app = App(routerService: routerService);
+  final app = App(routerService: routerService, );
+
+  SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+    statusBarColor: Colors.white, // Set the status bar color to white
+    statusBarIconBrightness: Brightness.dark, // Set the status bar icons to dark
+  ));
 
   runApp(MultiProvider(providers: providers, child: app));
 }

@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:luzu/core/failure/failure.dart';
+import 'package:luzu/features/auth/data/models/session_model.dart';
 import 'package:luzu/features/auth/domain/entities/login_data.dart';
 import 'package:luzu/features/auth/domain/entities/register_data.dart';
 import 'package:luzu/features/auth/domain/entities/session.dart';
@@ -28,7 +29,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
       Uri.parse('$host/login'),
       body: jsonEncode({'uid': uid}),
     );
-    return tryGetTokenFromResponse(result);
+    return tryGetTokenFromResponse(result, uid);
   }
 
   @override
@@ -40,23 +41,24 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
     return userCredential.user!.uid;
   }
 
-  Session tryGetTokenFromResponse(Response response) {
+  Session tryGetTokenFromResponse(Response response, String uid) {
     if (response.statusCode == 200) {
       final payload = jsonDecode(response.body);
+
       if (payload['status'] != 'ok') {
         throw UnhandledFailure(message: payload['message']);
       }
-      return payload['message'];
+      return SessionModel(token: payload['message'], uid: uid);
     }
     throw UnhandledFailure(message: 'Error on request');
   }
 
   @override
   Future<String> loginOnFirebase(LoginData data) async {
-      final result = await auth.signInWithEmailAndPassword(
-        email: data.email,
-        password: data.password,
-      );
-      return result.user!.uid;
+    final result = await auth.signInWithEmailAndPassword(
+      email: data.email,
+      password: data.password,
+    );
+    return result.user!.uid;
   }
 }

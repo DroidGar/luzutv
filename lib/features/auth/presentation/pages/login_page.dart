@@ -117,8 +117,13 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   void listener(BuildContext context, LoginState state) {
+    print('state: $state');
     if (state is OnLoginSuccess) {
-      context.pushReplacement(HomePage.routeName);
+      context.go(HomePage.routeName);
+    }
+
+    if(state is OnLoginFirebaseSuccess){
+      _cubit.actionLogin(state.uid);
     }
 
     if (state is OnLoginFailure) {

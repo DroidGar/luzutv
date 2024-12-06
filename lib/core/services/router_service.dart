@@ -15,9 +15,10 @@ class RouterService {
       }
 
       final prefs = await SharedPreferences.getInstance();
-      final token =  prefs.getString('token');
+      final token = prefs.getString('token');
       final isLogin = token != null && token.isNotEmpty;
-
+print('isLogin: $isLogin');
+print(state.uri);
       if (!isLogin) {
         return LoginPage.routeName;
       }
@@ -39,7 +40,9 @@ class RouterService {
       GoRoute(
         path: HomePage.routeName,
         builder: (BuildContext context, GoRouterState state) {
-          return const ConfigWrap(child: HomePage());
+          return const Material(
+            child: ConfigWrap(child: HomePage()),
+          );
         },
       ),
     ],
