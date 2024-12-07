@@ -15,9 +15,15 @@ class SurveyWidget extends StatelessWidget {
         children: [
           ElevatedButton(onPressed: () => {}, child: Text("Encuesta")),
           SizedBox(width: 20),
-          Text(
-            "Que te parece el origen de Luzu Tv?",
-            style: Theme.of(context).textTheme.bodyMedium,
+          Expanded(
+            child: Text(
+              "Que te parece el origen de Luzu Tv?",
+              style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                    color: Colors.grey[600],
+                    fontWeight: FontWeight.bold,
+                  ),
+              textAlign: TextAlign.center,
+            ),
           ),
         ],
       ),

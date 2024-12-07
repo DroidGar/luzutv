@@ -34,8 +34,8 @@ class _ConfigWrapState extends State<ConfigWrap> {
         if(snapshot.hasError) {
           return const Center(child: Text("Error"));
         }
-        final videoId = jsonDecode(snapshot.data.body)["videoId"];
-        // final videoId = "cb12KmMMDJA";
+        // final videoId = jsonDecode(snapshot.data.body)["videoId"];
+        final videoId = "cb12KmMMDJA";
 
         if(videoId.isEmpty) {
           return const Center(child: Text("Offline"));
