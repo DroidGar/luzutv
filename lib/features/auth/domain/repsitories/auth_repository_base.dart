@@ -8,4 +8,5 @@ abstract class AuthRepositoryBase {
   Future<Either<Failure, Session>> loginOnServer(String uid);
   Future<Either<Failure, String>> loginOnFirebase(LoginData data);
   Future<Either<Failure, String>> registerOnFirebase(RegisterData data);
+  Future<Either<Failure, void>> logout();
 }

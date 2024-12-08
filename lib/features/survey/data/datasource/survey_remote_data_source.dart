@@ -29,7 +29,6 @@ class SurveyRemoteDataSource implements SurveyRemoteDataSourceBase {
 
   @override
   Future<Survey> save(Survey survey) async {
-    print(survey.toJson());
     final response = await client.post(
       Uri.parse('$host/survey'),
       body: jsonEncode(survey.toJson()),

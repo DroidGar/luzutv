@@ -6,6 +6,8 @@ abstract class AuthLocalDataSourceBase {
   Future<void> cacheSession(Session session);
 
   Future<Session> getSession();
+
+  Future<void> clearSession();
 }
 
 class AuthLocalDataSource implements AuthLocalDataSourceBase {
@@ -25,5 +27,10 @@ class AuthLocalDataSource implements AuthLocalDataSourceBase {
       token: shared.getString('token') ?? '',
       uid: shared.getString('uid') ?? '',
     );
+  }
+
+  @override
+  Future<void> clearSession() {
+    return shared.clear();
   }
 }

@@ -8,6 +8,7 @@ import 'package:luzu/features/auth/data/repositories/auth_repository.dart';
 import 'package:luzu/features/auth/domain/repsitories/auth_repository_base.dart';
 import 'package:luzu/features/auth/domain/usecases/login_on_firebase.dart';
 import 'package:luzu/features/auth/domain/usecases/login_on_server.dart';
+import 'package:luzu/features/auth/domain/usecases/logout.dart';
 import 'package:luzu/features/auth/domain/usecases/register_on_firebase.dart';
 import 'package:luzu/features/auth/presentation/manager/auth_interceptor.dart';
 import 'package:luzu/features/auth/presentation/manager/login_cubit.dart';
@@ -48,8 +49,9 @@ Future<void> setUpDependencies() async {
   getIt.registerLazySingleton<LoginOnFirebase>(() => LoginOnFirebase(getIt()));
   getIt.registerLazySingleton<LoadSurvey>(() => LoadSurvey(getIt()));
   getIt.registerLazySingleton<SaveSurvey>(() => SaveSurvey(getIt()));
+  getIt.registerLazySingleton<Logout>(() => Logout(getIt()));
 
   getIt.registerLazySingleton<RegisterCubit>(() => RegisterCubit(getIt(), getIt()));
-  getIt.registerLazySingleton<LoginCubit>(() => LoginCubit(getIt(), getIt()));
+  getIt.registerFactory<LoginCubit>(() => LoginCubit(getIt(), getIt()));
   getIt.registerLazySingleton<SurveyCubit>(() => SurveyCubit(getIt(), getIt()));
 }

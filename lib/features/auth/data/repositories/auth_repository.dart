@@ -49,4 +49,15 @@ class AuthRepository extends AuthRepositoryBase {
       return Left(UnhandledFailure(message: e.toString()));
     }
   }
+
+  @override
+  Future<Either<Failure, void>> logout() async {
+    try {
+      await local.clearSession();
+      return const Right(null);
+    } catch (e) {
+      if (e is Failure) return Left(e);
+      return Left(UnhandledFailure(message: e.toString()));
+    }
+  }
 }

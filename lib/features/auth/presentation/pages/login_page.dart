@@ -27,7 +27,6 @@ class _LoginPageState extends State<LoginPage> {
   @override
   void initState() {
     super.initState();
-
     _emailController.text = 'holzmanneduardo@gmail.com';
     _passwordController.text = '123456';
   }
@@ -117,7 +116,6 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   void listener(BuildContext context, LoginState state) {
-    print('state: $state');
     if (state is OnLoginSuccess) {
       context.go(HomePage.routeName);
     }

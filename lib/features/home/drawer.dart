@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:luzu/core/services/di_service.dart';
+import 'package:luzu/core/services/router_service.dart';
+import 'package:luzu/features/auth/domain/usecases/logout.dart';
+import 'package:luzu/features/auth/presentation/pages/login_page.dart';
 
 Drawer drawer(BuildContext context) {
   return Drawer(
@@ -20,8 +25,10 @@ Drawer drawer(BuildContext context) {
         ),
         ListTile(
           title: const Text('Salir'),
-          onTap: () {
-            Navigator.pop(context);
+          onTap: () async {
+            final logout = getIt.get<Logout>();
+            await logout();
+            context.go(LoginPage.routeName);
           },
         ),
       ],
