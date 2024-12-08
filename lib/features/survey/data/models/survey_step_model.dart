@@ -23,8 +23,7 @@ class SurveyStepModel extends SurveyStep {
   Map<String, dynamic> toJson() {
     return {
       'id': id,
-      'question': text,
-      'options': options.map((option) => option.toJson()).toList(),
+      'selected_option_id': selectedOption,
     };
   }
 }

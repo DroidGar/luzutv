@@ -19,10 +19,9 @@ class SurveyModel extends Survey {
     );
   }
 
+  @override
   Map<String, dynamic> toJson() {
     return {
-      'title': title,
-      'description': description,
       'questions': steps.map((step) => step.toJson()).toList(),
     };
   }

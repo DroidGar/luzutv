@@ -2,7 +2,6 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:http/http.dart';
-import 'package:luzu/features/auth/domain/entities/session.dart';
 import 'package:luzu/features/survey/data/models/survey_model.dart';
 import 'package:luzu/features/survey/domain/entities/survey.dart';
 import 'package:luzu/main.dart';
@@ -30,6 +29,7 @@ class SurveyRemoteDataSource implements SurveyRemoteDataSourceBase {
 
   @override
   Future<Survey> save(Survey survey) async {
+    print(survey.toJson());
     final response = await client.post(
       Uri.parse('$host/survey'),
       body: jsonEncode(survey.toJson()),

@@ -6,7 +6,7 @@ abstract class SurveyOption {
   SurveyOption({
     required this.id,
     required this.value,
-    required this.type,
+    required this.type
   });
 
   Map toJson();

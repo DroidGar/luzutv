@@ -1,6 +1,7 @@
 import 'package:luzu/features/survey/domain/entities/survey_option.dart';
 
 class SurveyOptionModel extends SurveyOption {
+
   SurveyOptionModel({
     required super.id,
     required super.value,

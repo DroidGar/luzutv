@@ -16,6 +16,7 @@ import 'package:luzu/features/survey/data/datasource/survey_remote_data_source.d
 import 'package:luzu/features/survey/data/repositories/survey_repository.dart';
 import 'package:luzu/features/survey/domain/repositories/survey_repository_base.dart';
 import 'package:luzu/features/survey/domain/use_cases/load_survey.dart';
+import 'package:luzu/features/survey/domain/use_cases/save_survey.dart';
 import 'package:luzu/features/survey/presentation/manager/survey_cubit.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -46,8 +47,9 @@ Future<void> setUpDependencies() async {
   getIt.registerLazySingleton<RegisterOnFirebase>(() => RegisterOnFirebase(getIt()));
   getIt.registerLazySingleton<LoginOnFirebase>(() => LoginOnFirebase(getIt()));
   getIt.registerLazySingleton<LoadSurvey>(() => LoadSurvey(getIt()));
+  getIt.registerLazySingleton<SaveSurvey>(() => SaveSurvey(getIt()));
 
   getIt.registerLazySingleton<RegisterCubit>(() => RegisterCubit(getIt(), getIt()));
   getIt.registerLazySingleton<LoginCubit>(() => LoginCubit(getIt(), getIt()));
-  getIt.registerLazySingleton<SurveyCubit>(() => SurveyCubit(getIt()));
+  getIt.registerLazySingleton<SurveyCubit>(() => SurveyCubit(getIt(), getIt()));
 }

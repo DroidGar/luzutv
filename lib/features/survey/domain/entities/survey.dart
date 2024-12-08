@@ -8,4 +8,5 @@ abstract class Survey {
   Survey({required this.title, required this.description, required this.steps});
 
   Map<String, dynamic> toJson();
+
 }

@@ -18,3 +18,11 @@ final class SurveyFailure extends SurveyState {
 
   SurveyFailure(this.failure);
 }
+
+final class SurveySaving extends SurveyState {}
+
+final class SurveySaved extends SurveyState {
+  final Survey survey;
+
+  SurveySaved(this.survey);
+}
