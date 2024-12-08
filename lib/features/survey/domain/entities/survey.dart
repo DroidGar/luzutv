@@ -6,4 +6,6 @@ abstract class Survey {
   final List<SurveyStep> steps;
 
   Survey({required this.title, required this.description, required this.steps});
+
+  Map<String, dynamic> toJson();
 }

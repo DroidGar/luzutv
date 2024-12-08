@@ -7,16 +7,24 @@ import 'package:luzu/features/survey/domain/repositories/survey_repository_base.
 
 class SurveyRepository extends SurveyRepositoryBase {
   final SurveyRemoteDataSourceBase remote;
-  final AuthLocalDataSourceBase local;
 
-  SurveyRepository(this.remote, this.local);
+  SurveyRepository(this.remote);
 
   @override
   Future<Either<Failure, Survey>> load() async {
     try {
-      final session = await local.getSession();
-      final survey = await remote.load(session);
+      final survey = await remote.load();
       return Right(survey);
+    } catch (e) {
+      return Left(UnhandledFailure(message: e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, Survey>> save(Survey survey) async {
+    try {
+      final savedSurvey = await remote.save(survey);
+      return Right(savedSurvey);
     } catch (e) {
       return Left(UnhandledFailure(message: e.toString()));
     }

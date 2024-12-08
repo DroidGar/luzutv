@@ -13,9 +13,7 @@ const host = 'https://api.luzutv.com';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
   final providers = [
     ChangeNotifierProvider(create: (_) => VideoProvider()),
@@ -25,11 +23,14 @@ void main() async {
 
   await setUpDependencies();
 
-  final app = App(routerService: routerService, );
+  final app = App(
+    routerService: routerService,
+  );
 
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
     statusBarColor: Colors.white, // Set the status bar color to white
-    statusBarIconBrightness: Brightness.dark, // Set the status bar icons to dark
+    statusBarIconBrightness:
+        Brightness.dark, // Set the status bar icons to dark
   ));
 
   runApp(MultiProvider(providers: providers, child: app));
