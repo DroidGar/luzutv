@@ -2,7 +2,7 @@ import 'package:floating/floating.dart';
 import 'package:flutter/material.dart';
 import 'package:luzu/features/home/app_bar.dart';
 import 'package:luzu/features/home/drawer.dart';
-import 'package:luzu/features/survey/survey_widget.dart';
+import 'package:luzu/features/survey/presentation/widgets/survey_widget.dart';
 import 'package:luzu/features/video/video_widget.dart';
 import 'package:luzu/features/video/video_provider.dart';
 import 'package:provider/provider.dart';

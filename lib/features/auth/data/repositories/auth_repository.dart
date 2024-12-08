@@ -6,13 +6,13 @@ import 'package:luzu/features/auth/data/datasource/auth_remote_data_source.dart'
 import 'package:luzu/features/auth/domain/entities/login_data.dart';
 import 'package:luzu/features/auth/domain/entities/register_data.dart';
 import 'package:luzu/features/auth/domain/entities/session.dart';
-import 'package:luzu/features/auth/domain/repsitories/auth_repository.dart';
+import 'package:luzu/features/auth/domain/repsitories/auth_repository_base.dart';
 
-class AuthRepositoryImpl extends AuthRepository {
-  final AuthRemoteDataSource remote;
-  final AuthLocalDataSource local;
+class AuthRepository extends AuthRepositoryBase {
+  final AuthRemoteDataSourceBase remote;
+  final AuthLocalDataSourceBase local;
 
-  AuthRepositoryImpl(this.remote, this.local);
+  AuthRepository(this.remote, this.local);
 
   @override
   Future<Either<Failure, Session>> loginOnServer(String uid) async {

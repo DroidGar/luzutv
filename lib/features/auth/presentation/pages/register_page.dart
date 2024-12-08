@@ -89,7 +89,7 @@ class _RegisterPageState extends State<RegisterPage> {
     }
     if (state is OnRegisterFailure || state is OnLoginFailure) {
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        content: Text((state as dynamic).failure.message),
+        content: Text((state as dynamic).failure.failure),
       ));
     }
     ;

@@ -9,7 +9,7 @@ import 'package:luzu/features/auth/domain/entities/session.dart';
 import 'package:http/http.dart';
 import 'package:luzu/main.dart';
 
-abstract class AuthRemoteDataSource {
+abstract class AuthRemoteDataSourceBase {
   Future<Session> loginOnServer(String uid);
 
   Future<String> loginOnFirebase(LoginData data);
@@ -17,11 +17,11 @@ abstract class AuthRemoteDataSource {
   Future<String> registerOnFirebase(RegisterData data);
 }
 
-class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
+class AuthRemoteDataSource implements AuthRemoteDataSourceBase {
   final Client http;
   final FirebaseAuth auth;
 
-  AuthRemoteDataSourceImpl(this.http, this.auth);
+  AuthRemoteDataSource(this.http, this.auth);
 
   @override
   Future<Session> loginOnServer(String uid) async {

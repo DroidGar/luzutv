@@ -4,6 +4,8 @@ import 'package:luzu/features/auth/presentation/pages/login_page.dart';
 import 'package:luzu/features/auth/presentation/pages/register_page.dart';
 import 'package:luzu/features/config_wrap.dart';
 import 'package:luzu/features/home/home_page.dart';
+import 'package:luzu/features/survey/domain/entities/survey.dart';
+import 'package:luzu/features/survey/presentation/pages/survey_stepper_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class RouterService {
@@ -17,8 +19,10 @@ class RouterService {
       final prefs = await SharedPreferences.getInstance();
       final token = prefs.getString('token');
       final isLogin = token != null && token.isNotEmpty;
-print('isLogin: $isLogin');
-print(state.uri);
+
+      print('isLogin: $isLogin');
+      print(state.uri);
+
       if (!isLogin) {
         return LoginPage.routeName;
       }
@@ -45,6 +49,12 @@ print(state.uri);
           );
         },
       ),
+      GoRoute(
+          path: SurveyStepperPage.routeName,
+          builder: (BuildContext context, GoRouterState state) {
+            return SurveyStepperPage(
+                survey: GoRouterState.of(context).extra! as Survey);
+          }),
     ],
   );
 }

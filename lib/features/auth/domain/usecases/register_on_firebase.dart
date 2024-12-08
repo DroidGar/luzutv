@@ -1,10 +1,10 @@
 import 'package:dartz/dartz.dart';
 import 'package:luzu/core/failure/failure.dart';
 import 'package:luzu/features/auth/domain/entities/register_data.dart';
-import 'package:luzu/features/auth/domain/repsitories/auth_repository.dart';
+import 'package:luzu/features/auth/domain/repsitories/auth_repository_base.dart';
 
 class RegisterOnFirebase {
-  final AuthRepository repository;
+  final AuthRepositoryBase repository;
 
   RegisterOnFirebase(this.repository);
 

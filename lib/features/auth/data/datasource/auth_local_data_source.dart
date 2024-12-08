@@ -1,24 +1,29 @@
+import 'package:luzu/features/auth/data/models/session_model.dart';
 import 'package:luzu/features/auth/domain/entities/session.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-abstract class AuthLocalDataSource {
+abstract class AuthLocalDataSourceBase {
   Future<void> cacheSession(Session session);
 
-  Future<String> getSession();
+  Future<Session> getSession();
 }
 
-class AuthLocalDataSourceImpl implements AuthLocalDataSource {
+class AuthLocalDataSource implements AuthLocalDataSourceBase {
   final SharedPreferences shared;
 
-  AuthLocalDataSourceImpl(this.shared);
+  AuthLocalDataSource(this.shared);
 
   @override
   Future<void> cacheSession(Session session) async {
     await shared.setString('token', session.token);
+    await shared.setString('uid', session.uid);
   }
 
   @override
-  Future<String> getSession() async {
-    return shared.getString('token') ?? '';
+  Future<Session> getSession() async {
+    return SessionModel(
+      token: shared.getString('token') ?? '',
+      uid: shared.getString('uid') ?? '',
+    );
   }
 }
