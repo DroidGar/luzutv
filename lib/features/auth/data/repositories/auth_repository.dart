@@ -60,4 +60,16 @@ class AuthRepository extends AuthRepositoryBase {
       return Left(UnhandledFailure(message: e.toString()));
     }
   }
+
+  @override
+  Future<Either<Failure, String>> loginOnGoogle() async {
+    try {
+      final uid = await remote.loginOnGoogle();
+      return Right(uid);
+    } catch (e) {
+      if (e is FirebaseAuthException) return Left(UnhandledFailure(message: e.message!));
+      if (e is Failure) return Left(e);
+      return Left(UnhandledFailure(message: e.toString()));
+    }
+  }
 }

@@ -14,41 +14,13 @@
       },
       "oauth_client": [
         {
-          "client_id": "703503467766-9kfd7t918e8l23qnmlpgnlpuvka2383d.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyD_-2m54CXlSogwz9r7L3V92znedKdGOu4"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "703503467766-9kfd7t918e8l23qnmlpgnlpuvka2383d.apps.googleusercontent.com",
-              "client_type": 3
-            },
-            {
-              "client_id": "703503467766-7o901cv0uij6latlkh9ka7thdqptjicu.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "com.emperador.luzu"
-              }
-            }
-          ]
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:703503467766:android:e44d37c095dfcf754958d7",
-        "android_client_info": {
-          "package_name": "com.emprador.luzutv"
-        }
-      },
-      "oauth_client": [
+          "client_id": "703503467766-mh6donqnta1jit72oisgtktags1il9o7.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.emperador.luzutv",
+            "certificate_hash": "21a71964b3dc82170fe404b0a0bf212f59d2c7be"
+          }
+        },
         {
           "client_id": "703503467766-9kfd7t918e8l23qnmlpgnlpuvka2383d.apps.googleusercontent.com",
           "client_type": 3

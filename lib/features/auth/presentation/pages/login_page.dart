@@ -91,6 +91,13 @@ class _LoginPageState extends State<LoginPage> {
                   },
                   child: const Text('Login'),
                 ),
+                const SizedBox(height: 20),
+                ElevatedButton(
+                  onPressed: () {
+                    _cubit.actionLoginWithGoogle(context);
+                  },
+                  child: const Text('Login with Google'),
+                ),
               ],
             ),
           ),

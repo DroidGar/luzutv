@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:luzu/core/services/di_service.dart';
-import 'package:luzu/core/services/router_service.dart';
 import 'package:luzu/features/auth/domain/usecases/logout.dart';
 import 'package:luzu/features/auth/presentation/pages/login_page.dart';
 

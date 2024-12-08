@@ -87,9 +87,14 @@ class _RegisterPageState extends State<RegisterPage> {
     if (state is OnRegisterSuccess) {
       _cubit.actionLogin(state.uid);
     }
-    if (state is OnRegisterFailure || state is OnLoginFailure) {
+    if (state is OnRegisterFailure) {
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        content: Text((state as dynamic).failure.failure),
+        content: Text(state.failure.message),
+      ));
+    }
+    if (state is OnLoginFailure) {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text(state.failure.message),
       ));
     }
     ;
