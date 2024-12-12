@@ -6,6 +6,7 @@ import 'package:luzu/features/auth/data/datasource/auth_remote_data_source.dart'
 import 'package:luzu/features/auth/domain/entities/login_data.dart';
 import 'package:luzu/features/auth/domain/entities/register_data.dart';
 import 'package:luzu/features/auth/domain/entities/session.dart';
+import 'package:luzu/features/auth/domain/entities/user.dart' as u;
 import 'package:luzu/features/auth/domain/repsitories/auth_repository_base.dart';
 
 class AuthRepository extends AuthRepositoryBase {
@@ -68,6 +69,17 @@ class AuthRepository extends AuthRepositoryBase {
       return Right(uid);
     } catch (e) {
       if (e is FirebaseAuthException) return Left(UnhandledFailure(message: e.message!));
+      if (e is Failure) return Left(e);
+      return Left(UnhandledFailure(message: e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, u.User>> me() async {
+    try {
+      final user = await remote.me();
+      return Right(user);
+    } catch (e) {
       if (e is Failure) return Left(e);
       return Left(UnhandledFailure(message: e.toString()));
     }

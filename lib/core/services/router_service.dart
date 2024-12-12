@@ -3,9 +3,10 @@ import 'package:go_router/go_router.dart';
 import 'package:luzu/features/auth/presentation/pages/login_page.dart';
 import 'package:luzu/features/auth/presentation/pages/register_page.dart';
 import 'package:luzu/features/config_wrap.dart';
-import 'package:luzu/features/home/home_page.dart';
+import 'package:luzu/features/home/presentation/pages/home_page.dart';
 import 'package:luzu/features/survey/domain/entities/survey.dart';
 import 'package:luzu/features/survey/presentation/pages/survey_stepper_page.dart';
+import 'package:luzu/features/user/presentation/pages/complete_profile_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class RouterService {
@@ -50,10 +51,16 @@ class RouterService {
         },
       ),
       GoRoute(
-          path: SurveyStepperPage.routeName,
-          builder: (BuildContext context, GoRouterState state) {
-            return SurveyStepperPage(
-                survey: GoRouterState.of(context).extra! as Survey);
+        path: SurveyStepperPage.routeName,
+        builder: (BuildContext context, GoRouterState state) {
+          return SurveyStepperPage(
+              survey: GoRouterState.of(context).extra! as Survey);
+        },
+      ),
+      GoRoute(
+          path: CompleteProfilePage.routeName,
+          builder: (context, state) {
+            return const CompleteProfilePage();
           }),
     ],
   );

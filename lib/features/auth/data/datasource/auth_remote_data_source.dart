@@ -4,9 +4,11 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:luzu/core/failure/failure.dart';
 import 'package:luzu/features/auth/data/models/session_model.dart';
+import 'package:luzu/features/auth/data/models/user_model.dart';
 import 'package:luzu/features/auth/domain/entities/login_data.dart';
 import 'package:luzu/features/auth/domain/entities/register_data.dart';
 import 'package:luzu/features/auth/domain/entities/session.dart';
+import 'package:luzu/features/auth/domain/entities/user.dart' as user;
 import 'package:http/http.dart';
 import 'package:luzu/main.dart';
 
@@ -18,6 +20,8 @@ abstract class AuthRemoteDataSourceBase {
   Future<String> loginOnGoogle();
 
   Future<String> registerOnFirebase(RegisterData data);
+
+  Future<user.User> me();
 }
 
 class AuthRemoteDataSource implements AuthRemoteDataSourceBase {
@@ -28,7 +32,6 @@ class AuthRemoteDataSource implements AuthRemoteDataSourceBase {
 
   @override
   Future<Session> loginOnServer(String uid) async {
-    print(uid);
     final result = await http.post(
       Uri.parse('$host/login'),
       body: jsonEncode({'uid': uid}),
@@ -47,7 +50,6 @@ class AuthRemoteDataSource implements AuthRemoteDataSourceBase {
 
   Session tryGetTokenFromResponse(Response response, String uid) {
     if (response.statusCode == 200) {
-      print(response.body);
       final payload = jsonDecode(response.body);
 
       if (payload['status'] != 'ok') {
@@ -85,5 +87,15 @@ class AuthRemoteDataSource implements AuthRemoteDataSourceBase {
     final UserCredential userCredential =
         await FirebaseAuth.instance.signInWithCredential(credential);
     return userCredential.user!.uid;
+  }
+
+  @override
+  Future<user.User> me() async {
+    final result = await http.get(Uri.parse('$host/me'));
+    if (result.statusCode != 200) {
+      throw UnhandledFailure(message: 'Error on request');
+    }
+    final payload = jsonDecode(result.body);
+    return UserModel.fromJson(payload);
   }
 }

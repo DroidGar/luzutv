@@ -14,7 +14,7 @@ class AuthInterceptor implements InterceptorContract {
   @override
   FutureOr<BaseRequest> interceptRequest({required BaseRequest request}) async {
     final session = await localDataSource.getSession();
-    request.headers[HttpHeaders.authorizationHeader] = 'Bearer ${session.token}';
+    request.headers["x-authorization"] = session.token;
     return request;
   }
 

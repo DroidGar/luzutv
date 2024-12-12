@@ -3,6 +3,7 @@ import 'package:luzu/core/failure/failure.dart';
 import 'package:luzu/features/auth/domain/entities/login_data.dart';
 import 'package:luzu/features/auth/domain/entities/register_data.dart';
 import 'package:luzu/features/auth/domain/entities/session.dart';
+import 'package:luzu/features/auth/domain/entities/user.dart';
 
 abstract class AuthRepositoryBase {
   Future<Either<Failure, Session>> loginOnServer(String uid);
@@ -10,4 +11,5 @@ abstract class AuthRepositoryBase {
   Future<Either<Failure, String>> loginOnGoogle();
   Future<Either<Failure, String>> registerOnFirebase(RegisterData data);
   Future<Either<Failure, void>> logout();
+  Future<Either<Failure, User>> me();
 }

@@ -4,7 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:luzu/core/services/di_service.dart';
 import 'package:luzu/core/widgets/loading_widget.dart';
 import 'package:luzu/features/auth/presentation/manager/register_cubit.dart';
-import 'package:luzu/features/home/home_page.dart';
+import 'package:luzu/features/home/presentation/pages/home_page.dart';
 
 class RegisterPage extends StatefulWidget {
   static String routeName = '/register';

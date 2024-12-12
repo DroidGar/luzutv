@@ -10,10 +10,12 @@ import 'package:luzu/features/auth/domain/usecases/login_on_firebase.dart';
 import 'package:luzu/features/auth/domain/usecases/login_on_server.dart';
 import 'package:luzu/features/auth/domain/usecases/login_with_google.dart';
 import 'package:luzu/features/auth/domain/usecases/logout.dart';
+import 'package:luzu/features/auth/domain/usecases/me.dart';
 import 'package:luzu/features/auth/domain/usecases/register_on_firebase.dart';
 import 'package:luzu/features/auth/presentation/manager/auth_interceptor.dart';
 import 'package:luzu/features/auth/presentation/manager/login_cubit.dart';
 import 'package:luzu/features/auth/presentation/manager/register_cubit.dart';
+import 'package:luzu/features/home/presentation/manager/home_cubit.dart';
 import 'package:luzu/features/survey/data/datasource/survey_remote_data_source.dart';
 import 'package:luzu/features/survey/data/repositories/survey_repository.dart';
 import 'package:luzu/features/survey/domain/repositories/survey_repository_base.dart';
@@ -52,8 +54,10 @@ Future<void> setUpDependencies() async {
   getIt.registerLazySingleton<LoadSurvey>(() => LoadSurvey(getIt()));
   getIt.registerLazySingleton<SaveSurvey>(() => SaveSurvey(getIt()));
   getIt.registerLazySingleton<Logout>(() => Logout(getIt()));
+  getIt.registerLazySingleton<Me>(() => Me(getIt()));
 
   getIt.registerLazySingleton<RegisterCubit>(() => RegisterCubit(getIt(), getIt()));
   getIt.registerFactory<LoginCubit>(() => LoginCubit(getIt(), getIt(), getIt()));
   getIt.registerLazySingleton<SurveyCubit>(() => SurveyCubit(getIt(), getIt()));
+  getIt.registerLazySingleton<HomeCubit>(() => HomeCubit(getIt()));
 }

@@ -6,7 +6,7 @@ import 'package:luzu/core/widgets/loading_widget.dart';
 import 'package:luzu/features/auth/data/models/logon_data_model.dart';
 import 'package:luzu/features/auth/presentation/manager/login_cubit.dart';
 import 'package:luzu/features/auth/presentation/pages/register_page.dart';
-import 'package:luzu/features/home/home_page.dart';
+import 'package:luzu/features/home/presentation/pages/home_page.dart';
 
 class LoginPage extends StatefulWidget {
   static String routeName = '/login';
