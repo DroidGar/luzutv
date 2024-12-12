@@ -60,7 +60,7 @@ class RouterService {
       GoRoute(
           path: CompleteProfilePage.routeName,
           builder: (context, state) {
-            return const CompleteProfilePage();
+            return  CompleteProfilePage();
           }),
     ],
   );

@@ -72,7 +72,7 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
 
         if (state is HomeLoaded) {
           if (!state.user.isProfileComplete) {
-            context.pushReplacement(CompleteProfilePage.routeName);
+            // context.pushReplacement(CompleteProfilePage.routeName);
           }
         }
       },
