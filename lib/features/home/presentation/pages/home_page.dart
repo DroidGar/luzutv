@@ -34,11 +34,17 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
     super.initState();
     WidgetsBinding.instance.addObserver(this);
     _cubit.loadMe();
+
   }
 
+
   @override
-  void didChangeAppLifecycleState(AppLifecycleState state) {
+  void didChangeAppLifecycleState(AppLifecycleState state) async {
     print('AppLifecycleState: $state');
+    if (state == AppLifecycleState.paused) {
+      final statusAfterEnabling = await floating.enable(OnLeavePiP());
+      print('PiP status: $statusAfterEnabling');
+    }
   }
 
   @override
@@ -72,7 +78,7 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
 
         if (state is HomeLoaded) {
           if (!state.user.isProfileComplete) {
-            // context.pushReplacement(CompleteProfilePage.routeName);
+            context.pushReplacement(CompleteProfilePage.routeName);
           }
         }
       },
@@ -118,15 +124,6 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
               ),
               SizedBox(height: 14),
               SurveyWidget(),
-              ElevatedButton(
-                onPressed: () {
-                  // final floating = Floating();
-                  // floating.isPipAvailable.then((isPipAvailable) async {
-                  //   await floating.enable(const ImmediatePiP());
-                  // });
-                },
-                child: const Text('Enable PiP'),
-              ),
             ],
           ),
         ),
