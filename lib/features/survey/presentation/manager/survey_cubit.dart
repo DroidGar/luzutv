@@ -18,7 +18,10 @@ class SurveyCubit extends Cubit<SurveyState> {
     final result = await loadSurvey();
     result.fold(
       (failure) => emit(SurveyFailure(failure)),
-      (survey) => emit(SurveyLoaded(survey)),
+      (survey) {
+        if (survey == null) return;
+        emit(SurveyLoaded(survey));
+      },
     );
   }
 

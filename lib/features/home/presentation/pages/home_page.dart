@@ -34,16 +34,12 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
     super.initState();
     WidgetsBinding.instance.addObserver(this);
     _cubit.loadMe();
-
   }
-
 
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) async {
-    print('AppLifecycleState: $state');
     if (state == AppLifecycleState.paused) {
       final statusAfterEnabling = await floating.enable(OnLeavePiP());
-      print('PiP status: $statusAfterEnabling');
     }
   }
 
@@ -88,8 +84,9 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
         }
         if (state is HomeFailure) {
           return Center(
-              child: Text(state.failure.message,
-                  style: Theme.of(context).textTheme.bodyLarge));
+            child: Text(state.failure.message,
+                style: Theme.of(context).textTheme.bodyLarge),
+          );
         }
         return PiPSwitcher(
           childWhenDisabled: Scaffold(

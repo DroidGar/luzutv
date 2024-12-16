@@ -7,7 +7,7 @@ import 'package:luzu/features/survey/domain/entities/survey.dart';
 import 'package:luzu/main.dart';
 
 abstract class SurveyRemoteDataSourceBase {
-  Future<Survey> load();
+  Future<Survey?> load();
 
   Future<Survey> save(Survey survey);
 }
@@ -18,13 +18,10 @@ class SurveyRemoteDataSource implements SurveyRemoteDataSourceBase {
   SurveyRemoteDataSource(this.client);
 
   @override
-  Future<Survey> load() async {
+  Future<Survey?> load() async {
     final response = await client.get(Uri.parse('$host/survey'));
-    if (response.statusCode == 200) {
-      return SurveyModel.fromJson(jsonDecode(response.body)["survey"]);
-    } else {
-      throw Exception('Failed to load survey');
-    }
+    final survey = jsonDecode(response.body)["survey"];
+    return survey == null ? null : SurveyModel.fromJson(survey);
   }
 
   @override

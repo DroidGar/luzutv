@@ -11,7 +11,7 @@ class SurveyRepository extends SurveyRepositoryBase {
   SurveyRepository(this.remote);
 
   @override
-  Future<Either<Failure, Survey>> load() async {
+  Future<Either<Failure, Survey?>> load() async {
     try {
       final survey = await remote.load();
       return Right(survey);

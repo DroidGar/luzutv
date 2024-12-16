@@ -10,7 +10,7 @@ class SurveyOptionModel extends SurveyOption {
 
   factory SurveyOptionModel.fromJson(Map<String, dynamic> json) {
     return SurveyOptionModel(
-      id: json['id'],
+      id: int.parse(json['id'].toString()),
       value: json['value'],
       type: json['type'],
     );

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:luzu/core/services/di_service.dart';
 import 'package:luzu/features/home/presentation/pages/home_page.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 class CompleteProfilePage extends StatefulWidget {
@@ -14,28 +16,16 @@ class CompleteProfilePage extends StatefulWidget {
 
 class _CompleteProfilePageState extends State<CompleteProfilePage> {
   final _controller = WebViewController();
+  final sharedPref = getIt<SharedPreferences>();
 
   @override
   void initState() {
     super.initState();
-
-    _controller
+    final token = _controller
       ..setJavaScriptMode(JavaScriptMode.unrestricted)
       ..loadRequest(
-        Uri.dataFromString('''
-        <html>
-          <body>
-            <h1>Complete Profile</h1>
-            <p>Complete your profile to continue</p>
-            <button onclick="callFlutterFunction()">Complete Profile</button>
-            <script>
-              function callFlutterFunction() {
-                window.flutter.postMessage('completeProfile');
-              }
-            </script>
-          </body>
-        </html>
-        ''', mimeType: 'text/html'),
+        Uri.parse('https://api.luzutv.com/user_update_form'),
+        headers: {'x-authorization': '${sharedPref.getString('token')}'},
       )
       ..addJavaScriptChannel(
         'flutter',

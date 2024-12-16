@@ -8,7 +8,7 @@ class LoadSurvey {
 
   LoadSurvey(this.repository);
 
-  Future<Either<Failure, Survey>> call() async {
+  Future<Either<Failure, Survey?>> call() async {
     return await repository.load();
   }
 }

@@ -8,8 +8,8 @@ class UserModel extends User {
     return UserModel(
       uid: profile['uid'],
       email: profile['email'],
-      isProfileComplete: !json['ask_info'],
-
+      isProfileComplete: true,
+      // isProfileComplete: !json['ask_info'],
     );
   }
 }

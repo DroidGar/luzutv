@@ -11,7 +11,7 @@ class SurveyStepModel extends SurveyStep {
 
   factory SurveyStepModel.fromJson(Map<String, dynamic> json) {
     return SurveyStepModel(
-      id: json['id'],
+      id: int.parse(json['id'].toString()),
       text: json['question'],
       options: json['options']
           .map<SurveyOption>((option) => SurveyOptionModel.fromJson(option))
